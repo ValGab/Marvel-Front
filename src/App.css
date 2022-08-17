@@ -97,6 +97,33 @@ main > p {
   outline-color: red;
 }
 
+.pagination {
+  margin: 5px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination span {
+  color: white;
+  margin: 0 15px;
+}
+
+.pagination-button {
+  width: 15%;
+}
+
+.pagination button {
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  color: white;
+  height: 25px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 .card-list {
   width: 100%;
   display: flex;

@@ -6,6 +6,7 @@ import Loader from "../components/Loader/Loader";
 const Comics = ({ searchComics, setSearchComics }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +19,21 @@ const Comics = ({ searchComics, setSearchComics }) => {
             filters = filters + `&title=${searchComics}`;
           }
         }
-        console.log(filters);
+        if (page) {
+          if (!filters) {
+            filters = filters + `?skip=${page}`;
+          } else {
+            filters = filters + `&skip=${page}`;
+          }
+        }
 
         const response = await axios.get(
           `https://marvel-back-vg.herokuapp.com/comics${filters}`
         );
         setData(response.data);
-        console.log(response.data);
+        if (response.data.count < 100) {
+          setPage(0);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log(error.response);
@@ -32,7 +41,7 @@ const Comics = ({ searchComics, setSearchComics }) => {
     };
 
     fetchData();
-  }, [searchComics]);
+  }, [searchComics, page]);
 
   return isLoading ? (
     <main>
@@ -48,13 +57,44 @@ const Comics = ({ searchComics, setSearchComics }) => {
         <span>Rechercher un comics :</span>
         <input
           type="text"
+          placeholder="ex : Avengers"
           value={searchComics}
           onChange={(event) => {
             setSearchComics(event.target.value);
           }}
         />
       </div>
+      {data.count > 100 && (
+        <div className="pagination">
+          {page >= 100 ? (
+            <button
+              className="pagination-button"
+              onClick={() => {
+                setPage((prevState) => prevState - 100);
+              }}
+            >
+              ◄ Page précédente
+            </button>
+          ) : (
+            <div className="pagination-button"></div>
+          )}
+          <span>{page / 100}</span>
+          {data.count > 100 && page < data.count - 100 ? (
+            <button
+              className="pagination-button"
+              onClick={() => {
+                setPage((prevState) => prevState + 100);
+              }}
+            >
+              Page suivante ►
+            </button>
+          ) : (
+            <div className="pagination-button"></div>
+          )}
+        </div>
+      )}
       <div className="card-list">
+        {/* Affichage de la liste des comics */}
         {data.results.length > 0 ? (
           data.results.map((element) => {
             return (
