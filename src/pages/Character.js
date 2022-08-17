@@ -9,8 +9,6 @@ const Character = () => {
   const [data, setData] = useState(null);
   const [comics, setComics] = useState(null);
 
-  console.log(comics);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

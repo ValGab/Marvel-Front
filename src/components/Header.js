@@ -1,7 +1,13 @@
 import logo from "../img/marvel_logo.png";
 import { Link, useLocation } from "react-router-dom";
 
-const Header = ({ setSearchComics, setSearchCharacter }) => {
+const Header = ({
+  setSearchComics,
+  setSearchCharacter,
+  setUserToken,
+  token,
+  username,
+}) => {
   const location = useLocation();
   return (
     <header>
@@ -37,6 +43,36 @@ const Header = ({ setSearchComics, setSearchCharacter }) => {
           <Link to="/favorites">Favoris</Link>
         )}
       </nav>
+      {!token ? (
+        <div className="register">
+          {location.pathname === "/login" ? (
+            <Link to="/login" className="red">
+              Se connecter
+            </Link>
+          ) : (
+            <Link to="/login">Se connecter</Link>
+          )}
+          {location.pathname === "/signup" ? (
+            <Link to="/signup" className="red">
+              S'inscrire
+            </Link>
+          ) : (
+            <Link to="/signup">S'inscrire</Link>
+          )}
+        </div>
+      ) : (
+        <div className="register">
+          <p>Bienvenue {username} !</p>
+          <Link
+            to="/"
+            onClick={() => {
+              setUserToken(null, null);
+            }}
+          >
+            Se déconnecter
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
