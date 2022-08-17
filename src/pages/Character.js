@@ -56,7 +56,11 @@ const Character = () => {
             <div className="character-comics-list">
               {comics.comics.map((element) => {
                 return (
-                  <Link to={`/comics/${element._id}`} className="comic-card">
+                  <Link
+                    to={`/comics/${element._id}`}
+                    className="comic-card"
+                    key={element._id}
+                  >
                     <img
                       src={
                         element.thumbnail.path +

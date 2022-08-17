@@ -78,7 +78,7 @@ const Home = ({ searchCharacter, setSearchCharacter }) => {
           ) : (
             <div className="pagination-button"></div>
           )}
-          <span>{page / 100}</span>
+          <span>{page / 100 + 1}</span>
           {data.count > 100 && page < data.count - 100 ? (
             <button
               className="pagination-button"
