@@ -15,6 +15,11 @@ h1 {
   margin-bottom: 25px;
 }
 
+h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 .app {
   display: flex;
   height: 100vh;
@@ -323,7 +328,7 @@ main > p {
 }
 
 .comic-card {
-  width: calc((100% - 70px) / 8);
+  width: 120px;
 }
 
 .comic-card img {

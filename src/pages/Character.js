@@ -49,6 +49,7 @@ const Character = () => {
           <div className="character-infos">
             <h1>{data.name}</h1>
             <p>{data.description}</p>
+            {comics.comics.length > 0 && <h3>Apparition dans :</h3>}
             <div className="character-comics-list">
               {comics.comics.map((element) => {
                 return (
