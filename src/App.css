@@ -237,10 +237,17 @@ main > p {
 .card-comics {
   height: 240px;
 }
+
+.card a,
+.card-comics a {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+}
 .card-img {
   width: 140px;
   height: 100%;
-  position: relative;
 }
 
 .card-img img {
@@ -250,14 +257,15 @@ main > p {
   object-position: center;
 }
 
-.card-img svg {
-  position: absolute;
-  top: 5px;
-  left: 5px;
+.icon {
   color: black;
-  background-color: white;
   padding: 5px;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: red;
 }
 
 .card-infos {
