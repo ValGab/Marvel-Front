@@ -15,13 +15,11 @@ const Character = () => {
         const response = await axios.get(
           `https://marvel-back-vg.herokuapp.com/character/${characterId}`
         );
-        console.log(response.data);
         setData(response.data);
         try {
           const response = await axios.get(
             `https://marvel-back-vg.herokuapp.com/comics/${characterId}`
           );
-          console.log(response.data);
           setComics(response.data);
         } catch (error) {
           console.log(error.response);

@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
+import Card from "../components/Card";
 
-const Home = ({ searchCharacter, setSearchCharacter }) => {
+const Home = ({ searchCharacter, setSearchCharacter, token }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
+  // const [favorites, setFavorites] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +31,17 @@ const Home = ({ searchCharacter, setSearchCharacter }) => {
         const response = await axios.get(
           `https://marvel-back-vg.herokuapp.com/characters${filters}`
         );
+        // if (token) {
+        //   const responseFavorites = await axios.get(
+        //     `https://marvel-back-vg.herokuapp.com/user/favorites`,
+        //     {
+        //       headers: {
+        //         Authorization: "Bearer " + token,
+        //       },
+        //     }
+        //   );
+        //   setFavorites(responseFavorites.data);
+        // }
         setData(response.data);
         setIsLoading(false);
         if (response.data.count < 100) {
@@ -98,28 +110,17 @@ const Home = ({ searchCharacter, setSearchCharacter }) => {
         {data.results.length > 0 ? (
           data.results.map((element) => {
             return (
-              <Link
-                to={`/character/${element._id}`}
+              <Card
+                path="character"
+                picture={element.thumbnail}
+                id={element._id}
+                name={element.name}
+                description={element.description}
                 className="card"
                 key={element._id}
-              >
-                <div className="card-img">
-                  {element.thumbnail && (
-                    <img
-                      src={
-                        element.thumbnail.path +
-                        "." +
-                        element.thumbnail.extension
-                      }
-                      alt={element.name}
-                    />
-                  )}
-                </div>
-                <div className="card-infos">
-                  <h2>{element.name}</h2>
-                  <p>{element.description}</p>
-                </div>
-              </Link>
+                token={token}
+                // favorites={favorites}
+              />
             );
           })
         ) : (

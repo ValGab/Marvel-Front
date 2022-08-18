@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
+import Card from "../components/Card";
 
-const Comics = ({ searchComics, setSearchComics }) => {
+const Comics = ({ searchComics, setSearchComics, token }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
@@ -98,28 +98,16 @@ const Comics = ({ searchComics, setSearchComics }) => {
         {data.results.length > 0 ? (
           data.results.map((element) => {
             return (
-              <Link
-                to={`/comics/${element._id}`}
+              <Card
+                path="comics"
+                picture={element.thumbnail}
+                id={element._id}
+                name={element.title}
+                description={element.description}
                 className="card-comics"
                 key={element._id}
-              >
-                <div className="card-img">
-                  {element.thumbnail && (
-                    <img
-                      src={
-                        element.thumbnail.path +
-                        "." +
-                        element.thumbnail.extension
-                      }
-                      alt={element.title}
-                    />
-                  )}
-                </div>
-                <div className="card-infos">
-                  <h2>{element.title}</h2>
-                  <p>{element.description}</p>
-                </div>
-              </Link>
+                token={token}
+              />
             );
           })
         ) : (

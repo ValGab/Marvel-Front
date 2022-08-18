@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import Cookies from "js-cookie";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -10,6 +11,8 @@ import Comics from "./pages/Comics";
 import Favorites from "./pages/Favorites";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+library.add(faHeart);
 
 function App() {
   const [searchCharacter, setSearchCharacter] = useState("");
@@ -19,7 +22,9 @@ function App() {
   const setUserToken = (possibleToken, possibleUsername) => {
     if (possibleToken === null) {
       Cookies.remove("token");
+      Cookies.remove("username");
       setToken(null);
+      setUsername(null);
     } else {
       Cookies.set("token", possibleToken, { expires: 5 });
       Cookies.set("username", possibleUsername, {
@@ -49,6 +54,7 @@ function App() {
                   <Home
                     searchCharacter={searchCharacter}
                     setSearchCharacter={setSearchCharacter}
+                    token={token}
                   />
                 }
               />
@@ -67,6 +73,7 @@ function App() {
                   <Comics
                     searchComics={searchComics}
                     setSearchComics={setSearchComics}
+                    token={token}
                   />
                 }
               />
