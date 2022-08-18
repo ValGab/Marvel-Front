@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
 const Card = ({
   id,
@@ -10,30 +13,28 @@ const Card = ({
   path,
   className,
   token,
-  //   favorites,
+  favoritesCharacters,
+  setFavoritesCharacters,
+  favoritesComics,
+  setFavoritesComics,
 }) => {
   const urlPic = picture.path + "." + picture.extension;
 
-  //   const isPresent = () => {
-  //     if (path === "character") {
-  //       if (favorites.favoritesCharacters) {
-  //         let isHere = false;
-  //         let index = 0;
-  //         for (let i = 0; i < favorites.favoritesCharacters.length; i++) {
-  //           if (id === favorites.favoritesCharacters[i].id) {
-  //             isHere = true;
-  //             index = i;
-  //           }
-  //         }
-  //         if (isHere) {
-  //           return (favorites.favoritesCharacters[index].isHere = true);
-  //         } else {
-  //           return (favorites.favoritesCharacters[index].isHere = false);
-  //         }
-  //       }
-  //     }
-  //   };
-  //   isPresent();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (favoritesCharacters) {
+      const isHere = (element) => element.id === id;
+
+      const isHereV = favoritesCharacters.findIndex(isHere);
+
+      if (isHereV !== -1) {
+        setIsFavorite(true);
+      }
+    }
+  }, [favoritesCharacters, id]);
+
+  const navigate = useNavigate();
 
   return (
     <div className={className}>
@@ -46,44 +47,125 @@ const Card = ({
           <p>{description}</p>
         </div>
       </Link>
-      <FontAwesomeIcon
-        className="icon"
-        icon="heart"
-        onClick={async () => {
-          if (path === "character") {
-            try {
-              const response = await axios.post(
-                "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter/create",
-                { id, urlPic, name },
-                {
-                  headers: {
-                    Authorization: "Bearer " + token,
-                  },
+      {isFavorite ? (
+        <FontAwesomeIcon
+          className="red-icon"
+          icon="heart"
+          onClick={async () => {
+            if (token) {
+              if (path === "character") {
+                try {
+                  const response = await axios.post(
+                    "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
+                    { id, urlPic, name },
+                    {
+                      headers: {
+                        Authorization: "Bearer " + token,
+                      },
+                    }
+                  );
+
+                  Cookies.set(
+                    "favorites-characters",
+                    JSON.stringify(response.data.newFavChar),
+                    {
+                      expires: 5,
+                    }
+                  );
+                  setIsFavorite(!isFavorite);
+                } catch (error) {
+                  console.log(error.response);
                 }
-              );
-              console.log(response.data);
-            } catch (error) {
-              console.log(error.response);
-            }
-          }
-          if (path === "comics") {
-            try {
-              const response = await axios.post(
-                "https://marvel-back-vg.herokuapp.com/user/favoritesComics/create",
-                { id, urlPic, title: name, description },
-                {
-                  headers: {
-                    Authorization: "Bearer " + token,
-                  },
+              }
+              if (path === "comics") {
+                try {
+                  const response = await axios.post(
+                    "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
+                    { id, urlPic, title: name },
+                    {
+                      headers: {
+                        Authorization: "Bearer " + token,
+                      },
+                    }
+                  );
+
+                  Cookies.set(
+                    "favorites-comics",
+                    JSON.stringify(response.data.newFavCom),
+                    {
+                      expires: 5,
+                    }
+                  );
+                  setIsFavorite(!isFavorite);
+                } catch (error) {
+                  console.log(error.response);
                 }
-              );
-              console.log(response.data);
-            } catch (error) {
-              console.log(error.response);
+              }
+            } else {
+              navigate("/login");
             }
-          }
-        }}
-      />
+          }}
+        />
+      ) : (
+        <FontAwesomeIcon
+          className="black-icon"
+          icon="heart"
+          onClick={async () => {
+            if (token) {
+              if (path === "character") {
+                try {
+                  const response = await axios.post(
+                    "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
+                    { id, urlPic, name },
+                    {
+                      headers: {
+                        Authorization: "Bearer " + token,
+                      },
+                    }
+                  );
+
+                  Cookies.set(
+                    "favorites-characters",
+                    JSON.stringify(response.data.newFavChar),
+                    {
+                      expires: 5,
+                    }
+                  );
+                  setIsFavorite(!isFavorite);
+                } catch (error) {
+                  console.log(error.response);
+                }
+              }
+              if (path === "comics") {
+                try {
+                  const response = await axios.post(
+                    "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
+                    { id, urlPic, title: name },
+                    {
+                      headers: {
+                        Authorization: "Bearer " + token,
+                      },
+                    }
+                  );
+
+                  Cookies.set(
+                    "favorites-comics",
+                    JSON.stringify(response.data.newFavCom),
+                    {
+                      expires: 5,
+                    }
+                  );
+                  setIsFavorite(!isFavorite);
+                } catch (error) {
+                  console.log(error.response);
+                }
+              }
+            } else {
+              navigate("/login");
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -2,7 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const Login = ({ token, setUserToken }) => {
+const Login = ({
+  token,
+  setUserToken,
+  setFavoritesCharacters,
+  setFavoritesComics,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,9 +32,12 @@ const Login = ({ token, setUserToken }) => {
                       password,
                     }
                   );
+
                   setUserToken(
                     response.data.token,
-                    response.data.account.username
+                    response.data.account.username,
+                    response.data.favoritesCharacters,
+                    response.data.favoritesComics
                   );
                   setEmail("");
                   setPassword("");
@@ -37,7 +45,11 @@ const Login = ({ token, setUserToken }) => {
                 } catch (error) {
                   setEmail("");
                   setPassword("");
-                  setError(error.response.data.message);
+                  if (error.response) {
+                    setError(error.response.data.message);
+                  } else {
+                    console.log(error);
+                  }
                 }
               };
 

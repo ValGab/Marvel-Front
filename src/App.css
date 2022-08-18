@@ -257,15 +257,25 @@ main > p {
   object-position: center;
 }
 
-.icon {
+.black-icon {
   color: black;
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
 }
 
-.icon:hover {
+.red-icon {
   color: red;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.black-icon:hover {
+  color: red;
+}
+.red-icon:hover {
+  color: black;
 }
 
 .card-infos {

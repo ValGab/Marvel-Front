@@ -3,11 +3,18 @@ import { useEffect, useState } from "react";
 import Loader from "../components/Loader/Loader";
 import Card from "../components/Card";
 
-const Home = ({ searchCharacter, setSearchCharacter, token }) => {
+const Home = ({
+  searchCharacter,
+  setSearchCharacter,
+  token,
+  favoritesCharacters,
+  setFavoritesCharacters,
+  favoritesComics,
+  setFavoritesComics,
+}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-  // const [favorites, setFavorites] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,7 +126,10 @@ const Home = ({ searchCharacter, setSearchCharacter, token }) => {
                 className="card"
                 key={element._id}
                 token={token}
-                // favorites={favorites}
+                favoritesCharacters={favoritesCharacters}
+                setFavoritesCharacters={setFavoritesCharacters}
+                favoritesComics={favoritesComics}
+                setFavoritesComics={setFavoritesComics}
               />
             );
           })

@@ -30,10 +30,11 @@ const Signup = ({ setUserToken, token }) => {
                     }
                   );
 
-                  console.log(response.data);
                   setUserToken(
                     response.data.token,
-                    response.data.account.username
+                    response.data.account.username,
+                    response.data.favoritesCharacters,
+                    response.data.favoritesComics
                   );
                   setError("");
                   setUsername("");

@@ -3,7 +3,15 @@ import axios from "axios";
 import Loader from "../components/Loader/Loader";
 import Card from "../components/Card";
 
-const Comics = ({ searchComics, setSearchComics, token }) => {
+const Comics = ({
+  searchComics,
+  setSearchComics,
+  token,
+  favoritesCharacters,
+  setFavoritesCharacters,
+  favoritesComics,
+  setFavoritesComics,
+}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
@@ -107,6 +115,10 @@ const Comics = ({ searchComics, setSearchComics, token }) => {
                 className="card-comics"
                 key={element._id}
                 token={token}
+                favoritesCharacters={favoritesCharacters}
+                setFavoritesCharacters={setFavoritesCharacters}
+                favoritesComics={favoritesComics}
+                setFavoritesComics={setFavoritesComics}
               />
             );
           })

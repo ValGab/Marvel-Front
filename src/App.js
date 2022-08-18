@@ -15,19 +15,41 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 library.add(faHeart);
 
 function App() {
+  // Variable avec Cookies.get pour pouvoir JSON.parse
+  const favoritesChar = Cookies.get("favorites-characters");
+  const favoritesCom = Cookies.get("favorites-comics");
   const [searchCharacter, setSearchCharacter] = useState("");
   const [searchComics, setSearchComics] = useState("");
   const [username, setUsername] = useState(Cookies.get("username") || "");
+  const [favoritesCharacters, setFavoritesCharacters] = useState(
+    Cookies.get("favorites-characters") ? JSON.parse(favoritesChar) : []
+  );
+  const [favoritesComics, setFavoritesComics] = useState(
+    Cookies.get("favorites-comics") ? JSON.parse(favoritesCom) : []
+  );
   const [token, setToken] = useState(Cookies.get("token") || null);
-  const setUserToken = (possibleToken, possibleUsername) => {
+  const setUserToken = (
+    possibleToken,
+    possibleUsername,
+    possibleFavChar,
+    possibleFavCom
+  ) => {
     if (possibleToken === null) {
       Cookies.remove("token");
       Cookies.remove("username");
+      Cookies.remove("favorites-characters");
+      Cookies.remove("favorites-comics");
       setToken(null);
       setUsername(null);
     } else {
       Cookies.set("token", possibleToken, { expires: 5 });
       Cookies.set("username", possibleUsername, {
+        expires: 5,
+      });
+      Cookies.set("favorites-characters", JSON.stringify(possibleFavChar), {
+        expires: 5,
+      }); // Passage du tableau en chaîne de caractères avec stringify
+      Cookies.set("favorites-comics", JSON.stringify(possibleFavCom), {
         expires: 5,
       });
       setToken(possibleToken);
@@ -55,13 +77,24 @@ function App() {
                     searchCharacter={searchCharacter}
                     setSearchCharacter={setSearchCharacter}
                     token={token}
+                    favoritesCharacters={favoritesCharacters}
+                    setFavoritesCharacters={setFavoritesCharacters}
+                    favoritesComics={favoritesComics}
+                    setFavoritesComics={setFavoritesComics}
                   />
                 }
               />
 
               <Route
                 path="/login"
-                element={<Login setUserToken={setUserToken} token={token} />}
+                element={
+                  <Login
+                    setUserToken={setUserToken}
+                    token={token}
+                    setFavoritesCharacters={setFavoritesCharacters}
+                    setFavoritesComics={setFavoritesComics}
+                  />
+                }
               />
               <Route
                 path="/signup"
@@ -74,6 +107,10 @@ function App() {
                     searchComics={searchComics}
                     setSearchComics={setSearchComics}
                     token={token}
+                    favoritesCharacters={favoritesCharacters}
+                    setFavoritesCharacters={setFavoritesCharacters}
+                    favoritesComics={favoritesComics}
+                    setFavoritesComics={setFavoritesComics}
                   />
                 }
               />
