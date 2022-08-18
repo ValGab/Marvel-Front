@@ -23,16 +23,29 @@ const Card = ({
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (favoritesCharacters) {
-      const isHere = (element) => element.id === id;
+    if (path === "character") {
+      if (favoritesCharacters.length > 0) {
+        const isHere = (element) => element.id === id;
 
-      const isHereV = favoritesCharacters.findIndex(isHere);
+        const isHereV = favoritesCharacters.findIndex(isHere);
 
-      if (isHereV !== -1) {
-        setIsFavorite(true);
+        if (isHereV !== -1) {
+          setIsFavorite(true);
+        }
       }
     }
-  }, [favoritesCharacters, id]);
+    if (path === "comics") {
+      if (favoritesComics.length > 0) {
+        const isHere = (element) => element.id === id;
+
+        const isHereV = favoritesComics.findIndex(isHere);
+
+        if (isHereV !== -1) {
+          setIsFavorite(true);
+        }
+      }
+    }
+  }, [favoritesCharacters, favoritesComics, path, id]);
 
   const navigate = useNavigate();
 
