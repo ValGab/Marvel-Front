@@ -51,7 +51,7 @@ const Card = ({
 
   return (
     <div className={className}>
-      <Link to={`/${path}/${id}`}>
+      <Link to={path === "character" ? `/${path}/${id}` : ""}>
         <div className="card-img">
           {picture && <img src={urlPic} alt={name} />}
         </div>
@@ -60,125 +60,67 @@ const Card = ({
           <p>{description}</p>
         </div>
       </Link>
-      {isFavorite ? (
-        <FontAwesomeIcon
-          className="red-icon"
-          icon="heart"
-          onClick={async () => {
-            if (token) {
-              if (path === "character") {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
-                    { id, urlPic, name },
-                    {
-                      headers: {
-                        Authorization: "Bearer " + token,
-                      },
-                    }
-                  );
-
-                  Cookies.set(
-                    "favorites-characters",
-                    JSON.stringify(response.data.newFavChar),
-                    {
-                      expires: 5,
-                    }
-                  );
-                  setIsFavorite(!isFavorite);
-                } catch (error) {
-                  console.log(error.response);
-                }
+      <FontAwesomeIcon
+        className={isFavorite ? "red-icon" : "black-icon"}
+        icon="heart"
+        onClick={async () => {
+          if (token) {
+            if (path === "character") {
+              try {
+                const response = await axios.post(
+                  "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
+                  { id, urlPic, name },
+                  {
+                    headers: {
+                      Authorization: "Bearer " + token,
+                    },
+                  }
+                );
+                Cookies.set(
+                  "favorites-characters",
+                  JSON.stringify(response.data.newFavChar),
+                  {
+                    expires: 5,
+                  }
+                );
+                const newTab = Cookies.get("favorites-characters");
+                setFavoritesCharacters(JSON.parse(newTab));
+                setIsFavorite(!isFavorite);
+              } catch (error) {
+                console.log(error.response);
               }
-              if (path === "comics") {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
-                    { id, urlPic, title: name },
-                    {
-                      headers: {
-                        Authorization: "Bearer " + token,
-                      },
-                    }
-                  );
-
-                  Cookies.set(
-                    "favorites-comics",
-                    JSON.stringify(response.data.newFavCom),
-                    {
-                      expires: 5,
-                    }
-                  );
-                  setIsFavorite(!isFavorite);
-                } catch (error) {
-                  console.log(error.response);
-                }
-              }
-            } else {
-              navigate("/login");
             }
-          }}
-        />
-      ) : (
-        <FontAwesomeIcon
-          className="black-icon"
-          icon="heart"
-          onClick={async () => {
-            if (token) {
-              if (path === "character") {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
-                    { id, urlPic, name },
-                    {
-                      headers: {
-                        Authorization: "Bearer " + token,
-                      },
-                    }
-                  );
+            if (path === "comics") {
+              try {
+                const response = await axios.post(
+                  "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
+                  { id, urlPic, title: name },
+                  {
+                    headers: {
+                      Authorization: "Bearer " + token,
+                    },
+                  }
+                );
 
-                  Cookies.set(
-                    "favorites-characters",
-                    JSON.stringify(response.data.newFavChar),
-                    {
-                      expires: 5,
-                    }
-                  );
-                  setIsFavorite(!isFavorite);
-                } catch (error) {
-                  console.log(error.response);
-                }
+                Cookies.set(
+                  "favorites-comics",
+                  JSON.stringify(response.data.newFavCom),
+                  {
+                    expires: 5,
+                  }
+                );
+                const newTab = Cookies.get("favorites-comics");
+                setFavoritesComics(JSON.parse(newTab));
+                setIsFavorite(!isFavorite);
+              } catch (error) {
+                console.log(error.response);
               }
-              if (path === "comics") {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
-                    { id, urlPic, title: name },
-                    {
-                      headers: {
-                        Authorization: "Bearer " + token,
-                      },
-                    }
-                  );
-
-                  Cookies.set(
-                    "favorites-comics",
-                    JSON.stringify(response.data.newFavCom),
-                    {
-                      expires: 5,
-                    }
-                  );
-                  setIsFavorite(!isFavorite);
-                } catch (error) {
-                  console.log(error.response);
-                }
-              }
-            } else {
-              navigate("/login");
             }
-          }}
-        />
-      )}
+          } else {
+            navigate("/login");
+          }
+        }}
+      />
     </div>
   );
 };

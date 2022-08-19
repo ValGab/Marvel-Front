@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 
 const Signup = ({ setUserToken, token }) => {
   const [username, setUsername] = useState("");
@@ -76,6 +76,9 @@ const Signup = ({ setUserToken, token }) => {
             />
             <button>S'inscrire</button>
             {error && <p>{error}</p>}
+            <p>
+              Tu as déjà un compte ? <Link to="/login">Connecte-toi !</Link>
+            </p>
           </form>
         </div>
       )}

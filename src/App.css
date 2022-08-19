@@ -138,6 +138,10 @@ header p {
 .register-form form p {
   color: white;
 }
+.login-form form p a,
+.register-form form p a {
+  color: white;
+}
 
 /* MAIN */
 
@@ -376,6 +380,7 @@ main > p {
 
 .favorites-link {
   width: 200px;
+  margin-bottom: 20px;
 }
 
 .favorites-link a {
@@ -385,7 +390,7 @@ main > p {
   text-decoration: none;
 }
 
-.favorites-link a > p {
+.favorites-link a > p:first-child {
   color: white;
   margin-bottom: 10px;
 }
@@ -402,6 +407,20 @@ main > p {
   height: 270px;
   object-fit: cover;
   object-position: center;
+}
+
+.remove {
+  position: relative;
+  color: black;
+  background-color: white;
+  height: 25px;
+  opacity: 0.8;
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* FOOTER */

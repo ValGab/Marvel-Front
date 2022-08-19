@@ -1,13 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
-const Login = ({
-  token,
-  setUserToken,
-  setFavoritesCharacters,
-  setFavoritesComics,
-}) => {
+const Login = ({ token, setUserToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -74,6 +69,9 @@ const Login = ({
             />
             <button>Se connecter</button>
             {error === "Unauthorized" && <p>Accès non autorisé</p>}
+            <p>
+              Tu n'as pas de compte ? <Link to="/signup">Inscris-toi !</Link>
+            </p>
           </form>
         </div>
       )}

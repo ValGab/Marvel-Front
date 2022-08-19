@@ -66,7 +66,7 @@ const Header = ({
           <Link
             to="/"
             onClick={() => {
-              setUserToken(null, null);
+              setUserToken(null);
             }}
           >
             Se déconnecter

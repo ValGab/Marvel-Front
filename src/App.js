@@ -12,6 +12,7 @@ import Favorites from "./pages/Favorites";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import ScrollToTop from "./components/ScrollToTop";
 library.add(faHeart);
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
       Cookies.remove("username");
       Cookies.remove("favorites-characters");
       Cookies.remove("favorites-comics");
+      setFavoritesCharacters([]);
+      setFavoritesComics([]);
       setToken(null);
       setUsername(null);
     } else {
@@ -69,54 +72,60 @@ function App() {
               username={username}
               setUserToken={setUserToken}
             />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Home
-                    searchCharacter={searchCharacter}
-                    setSearchCharacter={setSearchCharacter}
-                    token={token}
-                    favoritesCharacters={favoritesCharacters}
-                    setFavoritesCharacters={setFavoritesCharacters}
-                    favoritesComics={favoritesComics}
-                    setFavoritesComics={setFavoritesComics}
-                  />
-                }
-              />
+            <ScrollToTop>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Home
+                      searchCharacter={searchCharacter}
+                      setSearchCharacter={setSearchCharacter}
+                      token={token}
+                      favoritesCharacters={favoritesCharacters}
+                      setFavoritesCharacters={setFavoritesCharacters}
+                      favoritesComics={favoritesComics}
+                      setFavoritesComics={setFavoritesComics}
+                    />
+                  }
+                />
 
-              <Route
-                path="/login"
-                element={
-                  <Login
-                    setUserToken={setUserToken}
-                    token={token}
-                    setFavoritesCharacters={setFavoritesCharacters}
-                    setFavoritesComics={setFavoritesComics}
-                  />
-                }
-              />
-              <Route
-                path="/signup"
-                element={<Signup setUserToken={setUserToken} token={token} />}
-              />
-              <Route
-                path="/comics"
-                element={
-                  <Comics
-                    searchComics={searchComics}
-                    setSearchComics={setSearchComics}
-                    token={token}
-                    favoritesCharacters={favoritesCharacters}
-                    setFavoritesCharacters={setFavoritesCharacters}
-                    favoritesComics={favoritesComics}
-                    setFavoritesComics={setFavoritesComics}
-                  />
-                }
-              />
-              <Route path="/favorites" element={<Favorites token={token} />} />
-              <Route path="/character/:characterId" element={<Character />} />
-            </Routes>
+                <Route
+                  path="/login"
+                  element={<Login setUserToken={setUserToken} token={token} />}
+                />
+                <Route
+                  path="/signup"
+                  element={<Signup setUserToken={setUserToken} token={token} />}
+                />
+                <Route
+                  path="/comics"
+                  element={
+                    <Comics
+                      searchComics={searchComics}
+                      setSearchComics={setSearchComics}
+                      token={token}
+                      favoritesCharacters={favoritesCharacters}
+                      setFavoritesCharacters={setFavoritesCharacters}
+                      favoritesComics={favoritesComics}
+                      setFavoritesComics={setFavoritesComics}
+                    />
+                  }
+                />
+                <Route
+                  path="/favorites"
+                  element={
+                    <Favorites
+                      token={token}
+                      favoritesCharacters={favoritesCharacters}
+                      setFavoritesCharacters={setFavoritesCharacters}
+                      favoritesComics={favoritesComics}
+                      setFavoritesComics={setFavoritesComics}
+                    />
+                  }
+                />
+                <Route path="/character/:characterId" element={<Character />} />
+              </Routes>
+            </ScrollToTop>
           </div>
           <Footer />
         </div>
