@@ -147,6 +147,9 @@ const Header = ({
                 <Link
                   to="/signup"
                   className={location.pathname === "/signup" && "red"}
+                  onClick={() => {
+                    setMobileMenu(false);
+                  }}
                 >
                   S'inscrire
                 </Link>

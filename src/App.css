@@ -171,6 +171,7 @@ main > p {
   font-size: 20px;
   text-align: center;
   line-height: 25px;
+  width: 90%;
 }
 
 .search {
@@ -550,7 +551,7 @@ footer a {
     display: none;
   }
   main {
-    margin-top: 100px;
+    margin-top: 80px;
   }
   .mobile-header {
     display: flex;
@@ -656,11 +657,19 @@ footer a {
   }
 
   .search {
+    flex-direction: column;
+    width: 100%;
     align-items: center;
+    justify-content: center;
   }
 
   .search span {
     font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .search input {
+    width: 80%;
   }
 
   .character-page {
