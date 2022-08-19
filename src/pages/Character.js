@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
@@ -53,11 +53,7 @@ const Character = () => {
             <div className="character-comics-list">
               {comics.comics.map((element) => {
                 return (
-                  <Link
-                    to={`/comics/${element._id}`}
-                    className="comic-card"
-                    key={element._id}
-                  >
+                  <div className="character-comics-card" key={element._id}>
                     <img
                       src={
                         element.thumbnail.path +
@@ -66,7 +62,7 @@ const Character = () => {
                       }
                       alt={element.title}
                     />
-                  </Link>
+                  </div>
                 );
               })}
             </div>

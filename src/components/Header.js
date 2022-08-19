@@ -1,5 +1,7 @@
 import logo from "../img/marvel_logo.png";
 import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 const Header = ({
   setSearchComics,
@@ -9,70 +11,163 @@ const Header = ({
   username,
 }) => {
   const location = useLocation();
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   return (
     <header>
-      <Link
-        to="/"
-        onClick={() => {
-          setSearchCharacter("");
-          setSearchComics("");
-        }}
-      >
-        <img src={logo} alt="logo-marvel" />
-      </Link>
-      <nav>
-        {location.pathname === "/" ? (
-          <Link to="/" className="red">
+      <div className="desktop-header">
+        <Link
+          to="/"
+          onClick={() => {
+            setSearchCharacter("");
+            setSearchComics("");
+          }}
+        >
+          <img src={logo} alt="logo-marvel" />
+        </Link>
+        <nav>
+          <Link to="/" className={location.pathname === "/" && "red"}>
             Personnages
           </Link>
-        ) : (
-          <Link to="/">Personnages</Link>
-        )}
-        {location.pathname === "/comics" ? (
-          <Link to="/comics" className="red">
+          <Link
+            to="/comics"
+            className={location.pathname === "/comics" && "red"}
+          >
             Comics
           </Link>
-        ) : (
-          <Link to="/comics">Comics</Link>
-        )}
-        {location.pathname === "/favorites" ? (
-          <Link to="/favorites" className="red">
+          <Link
+            to="/favorites"
+            className={location.pathname === "/favorites" && "red"}
+          >
             Favoris
           </Link>
-        ) : (
-          <Link to="/favorites">Favoris</Link>
-        )}
-      </nav>
-      {!token ? (
-        <div className="register">
-          {location.pathname === "/login" ? (
-            <Link to="/login" className="red">
+        </nav>
+        {!token ? (
+          <div className="register">
+            <Link
+              to="/login"
+              className={location.pathname === "/login" && "red"}
+            >
               Se connecter
             </Link>
-          ) : (
-            <Link to="/login">Se connecter</Link>
-          )}
-          {location.pathname === "/signup" ? (
-            <Link to="/signup" className="red">
+
+            <Link
+              to="/signup"
+              className={location.pathname === "/signup" && "red"}
+            >
               S'inscrire
             </Link>
-          ) : (
-            <Link to="/signup">S'inscrire</Link>
-          )}
-        </div>
-      ) : (
-        <div className="register">
-          <p>Bienvenue {username} !</p>
+          </div>
+        ) : (
+          <div className="register">
+            <p>Bienvenue {username} !</p>
+            <Link
+              to="/"
+              onClick={() => {
+                setUserToken(null);
+              }}
+            >
+              Se déconnecter
+            </Link>
+          </div>
+        )}
+      </div>
+      <div className="mobile-header">
+        <div className="mobile-header-top">
           <Link
             to="/"
             onClick={() => {
-              setUserToken(null);
+              setSearchCharacter("");
+              setSearchComics("");
+              setMobileMenu(false);
             }}
           >
-            Se déconnecter
+            <img src={logo} alt="logo-marvel" />
           </Link>
+          {!mobileMenu ? (
+            <FontAwesomeIcon
+              icon="bars"
+              onClick={() => {
+                setMobileMenu(!mobileMenu);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon="xmark"
+              onClick={() => {
+                setMobileMenu(!mobileMenu);
+              }}
+            />
+          )}
         </div>
-      )}
+        {mobileMenu && (
+          <div className="mobile-menu">
+            <nav className="nav-mobile">
+              <Link
+                to="/"
+                className={location.pathname === "/" && "red"}
+                onClick={() => {
+                  setMobileMenu(false);
+                }}
+              >
+                Personnages
+              </Link>
+
+              <Link
+                to="/comics"
+                className={location.pathname === "/comics" && "red"}
+                onClick={() => {
+                  setMobileMenu(false);
+                }}
+              >
+                Comics
+              </Link>
+              <Link
+                to="/favorites"
+                className={location.pathname === "/favorites" && "red"}
+                onClick={() => {
+                  setMobileMenu(false);
+                }}
+              >
+                Favoris
+              </Link>
+            </nav>
+            {!token ? (
+              <div className="register-mobile">
+                <Link
+                  to="/login"
+                  className={location.pathname === "/login" && "red"}
+                  onClick={() => {
+                    setMobileMenu(false);
+                  }}
+                >
+                  Se connecter
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className={location.pathname === "/signup" && "red"}
+                >
+                  S'inscrire
+                </Link>
+              </div>
+            ) : (
+              <div className="register-mobile">
+                <p>Bienvenue {username} !</p>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    setUserToken(null);
+                    setMobileMenu(false);
+                  }}
+                >
+                  Se déconnecter
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </header>
   );
 };

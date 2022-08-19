@@ -51,15 +51,27 @@ const Card = ({
 
   return (
     <div className={className}>
-      <Link to={path === "character" ? `/${path}/${id}` : ""}>
-        <div className="card-img">
-          {picture && <img src={urlPic} alt={name} />}
+      {path === "character" ? (
+        <Link to={`/${path}/${id}`}>
+          <div className="card-img">
+            {picture && <img src={urlPic} alt={name} />}
+          </div>
+          <div className="card-infos">
+            <h2>{name}</h2>
+            <p>{description}</p>
+          </div>
+        </Link>
+      ) : (
+        <div>
+          <div className="card-img">
+            {picture && <img src={urlPic} alt={name} />}
+          </div>
+          <div className="card-infos">
+            <h2>{name}</h2>
+            <p>{description}</p>
+          </div>
         </div>
-        <div className="card-infos">
-          <h2>{name}</h2>
-          <p>{description}</p>
-        </div>
-      </Link>
+      )}
       <FontAwesomeIcon
         className={isFavorite ? "red-icon" : "black-icon"}
         icon="heart"

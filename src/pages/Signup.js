@@ -43,7 +43,6 @@ const Signup = ({ setUserToken, token }) => {
                   navigate("/");
                 } catch (error) {
                   setError(error.response.data.message);
-                  setEmail("");
                   setPassword("");
                 }
               };
@@ -75,7 +74,8 @@ const Signup = ({ setUserToken, token }) => {
               }}
             />
             <button>S'inscrire</button>
-            {error && <p>{error}</p>}
+            {error === "Missing parameters" && <p>Champs incomplets</p>}
+            {error === "User already exist" && <p>Cet e-mail existe déjà !</p>}
             <p>
               Tu as déjà un compte ? <Link to="/login">Connecte-toi !</Link>
             </p>

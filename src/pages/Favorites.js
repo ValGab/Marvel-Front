@@ -45,7 +45,11 @@ const Favorites = ({
         <div className="favorites">
           <h1>Mes favoris</h1>
           <div>
-            <h2>Personnages favoris</h2>
+            {data.favoritesCharacters.length !== 0 ? (
+              <h2>Personnages favoris</h2>
+            ) : (
+              <h2>Aucun personnage</h2>
+            )}
             <div className="favorites-list">
               {data.favoritesCharacters.length > 0 &&
                 data.favoritesCharacters.map((element) => {
@@ -90,7 +94,11 @@ const Favorites = ({
             </div>
           </div>
           <div>
-            <h2>Comics favoris</h2>
+            {data.favoritesComics.length !== 0 ? (
+              <h2>Comics favoris</h2>
+            ) : (
+              <h2>Aucun comics</h2>
+            )}{" "}
             <div className="favorites-list">
               {data.favoritesComics.length > 0 &&
                 data.favoritesComics.map((element) => {

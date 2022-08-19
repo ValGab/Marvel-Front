@@ -33,7 +33,8 @@ h3 {
   overflow-y: scroll;
 }
 
-.red {
+.desktop-header .red,
+.mobile-header .red {
   color: red;
 }
 
@@ -42,17 +43,22 @@ h3 {
 header {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   width: 15%;
   position: sticky;
   top: 0;
 }
 
-header img {
+.desktop-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.desktop-header img {
   width: 100%;
 }
 
-header nav {
+.desktop-header nav {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +66,7 @@ header nav {
   width: 100%;
 }
 
-header nav a {
+.desktop-header nav a {
   color: white;
   text-decoration: none;
   font-size: 25px;
@@ -77,21 +83,27 @@ header nav a {
   padding-top: 20px;
 }
 
-header a {
+.desktop-header a {
   color: white;
   text-decoration: none;
   margin: 10px;
   font-size: 20px;
 }
 
-header a:hover {
+.desktop-header a:hover {
   color: red;
 }
 
-header p {
+.desktop-header p {
   color: white;
   margin-bottom: 15px;
 }
+
+.mobile-header {
+  display: none;
+}
+
+/* SIGNUP - LOGIN */
 
 .login-form,
 .register-form {
@@ -137,6 +149,7 @@ header p {
 .login-form form p,
 .register-form form p {
   color: white;
+  margin-bottom: 20px;
 }
 .login-form form p a,
 .register-form form p a {
@@ -156,6 +169,8 @@ main > p {
   color: white;
   margin: 20px 0 8px 0;
   font-size: 20px;
+  text-align: center;
+  line-height: 25px;
 }
 
 .search {
@@ -242,13 +257,20 @@ main > p {
   height: 240px;
 }
 
-.card a,
-.card-comics a {
+.card a {
   display: flex;
   text-decoration: none;
   color: black;
   width: 100%;
 }
+
+.card-comics > div {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+}
+
 .card-img {
   width: 140px;
   height: 100%;
@@ -261,8 +283,9 @@ main > p {
   object-position: center;
 }
 
-.black-icon {
-  color: black;
+.black-icon,
+.red-icon {
+  font-size: 18px;
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
@@ -270,9 +293,10 @@ main > p {
 
 .red-icon {
   color: red;
-  padding: 5px;
-  border-radius: 50%;
-  cursor: pointer;
+}
+
+.black-icon {
+  color: black;
 }
 
 .black-icon:hover {
@@ -349,11 +373,11 @@ main > p {
   gap: 10px;
 }
 
-.comic-card {
+.character-comics-card {
   width: 120px;
 }
 
-.comic-card img {
+.character-comics-card img {
   width: 100%;
 }
 
@@ -437,4 +461,205 @@ footer {
 footer a {
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 1380px) {
+  .card,
+  .card-comics {
+    width: calc((100% - 20px) / 3);
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+  }
+
+  header {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .desktop-header {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+  }
+
+  .desktop-header img {
+    width: 200px;
+  }
+
+  .desktop-header a {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .desktop-header p {
+    margin-bottom: 0;
+  }
+
+  .desktop-header nav {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 0 15px;
+  }
+
+  .desktop-header nav a {
+    margin: 0 15px;
+  }
+
+  .register {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    border-top: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .register p {
+    margin-right: 10px;
+  }
+
+  main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .card,
+  .card-comics {
+    width: calc((100% - 10px) / 2);
+  }
+
+  .pagination {
+    width: 100%;
+  }
+
+  .pagination button {
+    width: 150px;
+  }
+}
+
+@media (max-width: 980px) {
+  .desktop-header {
+    display: none;
+  }
+  main {
+    margin-top: 100px;
+  }
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+  }
+
+  .mobile-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    width: 100%;
+    padding: 15px 30px 15px 20px;
+  }
+
+  .mobile-header a {
+    width: 20%;
+  }
+
+  .mobile-header img {
+    width: 100%;
+  }
+
+  .mobile-header svg {
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    height: 100vh;
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 25px;
+  }
+
+  .nav-mobile {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-mobile a {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    margin: 15px 0;
+  }
+
+  .register-mobile {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+    color: white;
+  }
+
+  .register-mobile p {
+    font-size: 18px;
+  }
+
+  .register-mobile a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+  }
+
+  .register-form form input,
+  .login-form form input,
+  .register-form form button,
+  .login-form form button {
+    width: 60%;
+  }
+
+  .black-icon,
+  .red-icon {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card,
+  .card-comics {
+    width: 100%;
+  }
+
+  .search {
+    align-items: center;
+  }
+
+  .search span {
+    font-size: 20px;
+  }
 }

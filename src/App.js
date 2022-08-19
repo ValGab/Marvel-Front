@@ -11,9 +11,9 @@ import Comics from "./pages/Comics";
 import Favorites from "./pages/Favorites";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTop from "./components/ScrollToTop";
-library.add(faHeart);
+library.add(faHeart, faBars, faXmark);
 
 function App() {
   // Variable avec Cookies.get pour pouvoir JSON.parse
