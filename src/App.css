@@ -551,7 +551,7 @@ footer a {
     display: none;
   }
   main {
-    margin-top: 80px;
+    padding-top: 80px;
   }
   .mobile-header {
     display: flex;
