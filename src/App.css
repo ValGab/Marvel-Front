@@ -662,4 +662,27 @@ footer a {
   .search span {
     font-size: 20px;
   }
+
+  .character-page {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .character-page h1 {
+    margin-top: 15px;
+    font-size: 35px;
+  }
+
+  .character-page p {
+    font-size: 20px;
+  }
+
+  .character-page-img {
+    width: 100%;
+  }
+
+  .character-infos {
+    width: 100%;
+  }
 }
