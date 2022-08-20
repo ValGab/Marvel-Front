@@ -382,6 +382,10 @@ main > p {
   width: 100%;
 }
 
+.character-comics-card:last-child {
+  margin-bottom: 30px;
+}
+
 /* FAVORITES PAGE */
 
 .favorites {
@@ -435,23 +439,22 @@ main > p {
 }
 
 .remove {
-  position: relative;
-  color: black;
-  background-color: white;
-  height: 25px;
-  opacity: 0.8;
-  width: 100%;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  height: 25px;
+  width: 100%;
+  color: black;
+  font-weight: bold;
   cursor: pointer;
 }
 
 /* FOOTER */
 
 footer {
-  height: 5%;
+  height: 38px;
+  width: 100%;
   background-color: red;
   display: flex;
   justify-content: center;
