@@ -203,9 +203,12 @@ main > p {
   align-items: center;
 }
 
+.pagination .number-pages {
+  margin: 0 15px;
+}
+
 .pagination span {
   color: white;
-  margin: 0 15px;
 }
 
 .pagination-button {
@@ -540,10 +543,6 @@ footer a {
     width: calc((100% - 10px) / 2);
   }
 
-  .pagination {
-    width: 100%;
-  }
-
   .pagination button {
     width: 150px;
   }
@@ -570,7 +569,7 @@ footer a {
     justify-content: space-between;
     background-color: black;
     width: 100%;
-    padding: 15px 30px 15px 20px;
+    padding: 15px 25px 15px 20px;
   }
 
   .mobile-header a {
@@ -607,7 +606,6 @@ footer a {
 
   .nav-mobile a {
     display: flex;
-    width: 100%;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
@@ -649,11 +647,15 @@ footer a {
 
   .black-icon,
   .red-icon {
-    font-size: 26px;
+    font-size: 22px;
   }
 }
 
 @media (max-width: 640px) {
+  main {
+    padding-top: 60px;
+  }
+
   .card,
   .card-comics {
     width: 100%;
@@ -673,6 +675,14 @@ footer a {
 
   .search input {
     width: 80%;
+  }
+
+  .pagination {
+    max-width: 375px;
+  }
+
+  .pagination-button {
+    width: 40%;
   }
 
   .character-page {

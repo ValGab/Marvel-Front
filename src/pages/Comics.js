@@ -15,6 +15,7 @@ const Comics = ({
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +40,7 @@ const Comics = ({
           `https://marvel-back-vg.herokuapp.com/comics${filters}`
         );
         setData(response.data);
+        setCount(response.data.count);
         if (response.data.count < 100) {
           setPage(0);
         }
@@ -50,6 +52,11 @@ const Comics = ({
 
     fetchData();
   }, [searchComics, page]);
+
+  let numberPages = 0;
+  if (count) {
+    numberPages = Math.ceil(count / 100);
+  }
 
   return isLoading ? (
     <main>
@@ -86,7 +93,10 @@ const Comics = ({
           ) : (
             <div className="pagination-button"></div>
           )}
-          <span>{page / 100 + 1}</span>
+          <div className="number-pages">
+            <span>{page / 100 + 1}</span>
+            <span>{numberPages && ` / ${numberPages}`}</span>
+          </div>
           {data.count > 100 && page < data.count - 100 ? (
             <button
               className="pagination-button"

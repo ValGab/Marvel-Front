@@ -29,6 +29,7 @@ function App() {
     Cookies.get("favorites-comics") ? JSON.parse(favoritesCom) : []
   );
   const [token, setToken] = useState(Cookies.get("token") || null);
+
   const setUserToken = (
     possibleToken,
     possibleUsername,

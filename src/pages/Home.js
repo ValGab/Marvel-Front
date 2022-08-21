@@ -15,6 +15,7 @@ const Home = ({
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,18 +39,8 @@ const Home = ({
         const response = await axios.get(
           `https://marvel-back-vg.herokuapp.com/characters${filters}`
         );
-        // if (token) {
-        //   const responseFavorites = await axios.get(
-        //     `https://marvel-back-vg.herokuapp.com/user/favorites`,
-        //     {
-        //       headers: {
-        //         Authorization: "Bearer " + token,
-        //       },
-        //     }
-        //   );
-        //   setFavorites(responseFavorites.data);
-        // }
         setData(response.data);
+        setCount(response.data.count);
         setIsLoading(false);
         if (response.data.count < 100) {
           setPage(0);
@@ -61,6 +52,11 @@ const Home = ({
 
     fetchData();
   }, [searchCharacter, page]);
+
+  let numberPages = 0;
+  if (count) {
+    numberPages = Math.ceil(count / 100);
+  }
 
   return isLoading ? (
     <main>
@@ -97,7 +93,10 @@ const Home = ({
           ) : (
             <div className="pagination-button"></div>
           )}
-          <span>{page / 100 + 1}</span>
+          <div className="number-pages">
+            <span>{page / 100 + 1}</span>
+            <span>{numberPages && ` / ${numberPages}`}</span>
+          </div>
           {data.count > 100 && page < data.count - 100 ? (
             <button
               className="pagination-button"

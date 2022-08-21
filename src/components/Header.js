@@ -1,5 +1,5 @@
 import logo from "../img/marvel_logo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
@@ -11,6 +11,7 @@ const Header = ({
   username,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
@@ -65,6 +66,7 @@ const Header = ({
               to="/"
               onClick={() => {
                 setUserToken(null);
+                navigate(0);
               }}
             >
               Se déconnecter
@@ -162,6 +164,7 @@ const Header = ({
                   onClick={() => {
                     setUserToken(null);
                     setMobileMenu(false);
+                    navigate(0);
                   }}
                 >
                   Se déconnecter
