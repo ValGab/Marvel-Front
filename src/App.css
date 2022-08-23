@@ -203,7 +203,7 @@ main > p {
   align-items: center;
 }
 
-.pagination .number-pages {
+.number-pages {
   margin: 0 15px;
 }
 
@@ -211,18 +211,25 @@ main > p {
   color: white;
 }
 
-.pagination-button {
+.pagination-button,
+.pagination-button-disabled {
   width: 15%;
-}
-
-.pagination button {
-  background-color: red;
   border: none;
-  cursor: pointer;
   color: white;
   height: 25px;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.pagination-button {
+  background-color: red;
+  cursor: pointer;
+}
+
+.pagination-button-disabled {
+  background-color: unset;
+  color: unset;
+  cursor: normal;
 }
 
 .card-list {
@@ -470,6 +477,12 @@ footer a {
   color: black;
 }
 
+/*--------------
+
+MEDIA QUERY 
+
+----------------*/
+
 @media (max-width: 1380px) {
   .card,
   .card-comics {
@@ -543,7 +556,8 @@ footer a {
     width: calc((100% - 10px) / 2);
   }
 
-  .pagination button {
+  .pagination-button,
+  .pagination-button-disabled {
     width: 150px;
   }
 }
@@ -588,8 +602,8 @@ footer a {
 
   .mobile-menu {
     height: 100vh;
-    background-color: black;
     width: 100%;
+    background-color: black;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -679,10 +693,19 @@ footer a {
 
   .pagination {
     max-width: 375px;
+    margin: 0;
   }
 
-  .pagination-button {
-    width: 40%;
+  .number-pages {
+    width: 60px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .pagination-button,
+  .pagination-button-disabled {
+    width: 130px;
+    font-size: 11px;
   }
 
   .character-page {

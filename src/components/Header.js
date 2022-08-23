@@ -27,18 +27,18 @@ const Header = ({
           <img src={logo} alt="logo-marvel" />
         </Link>
         <nav>
-          <Link to="/" className={location.pathname === "/" && "red"}>
+          <Link to="/" className={location.pathname === "/" ? "red" : ""}>
             Personnages
           </Link>
           <Link
             to="/comics"
-            className={location.pathname === "/comics" && "red"}
+            className={location.pathname === "/comics" ? "red" : ""}
           >
             Comics
           </Link>
           <Link
             to="/favorites"
-            className={location.pathname === "/favorites" && "red"}
+            className={location.pathname === "/favorites" ? "red" : ""}
           >
             Favoris
           </Link>
@@ -47,14 +47,14 @@ const Header = ({
           <div className="register">
             <Link
               to="/login"
-              className={location.pathname === "/login" && "red"}
+              className={location.pathname === "/login" ? "red" : ""}
             >
               Se connecter
             </Link>
 
             <Link
               to="/signup"
-              className={location.pathname === "/signup" && "red"}
+              className={location.pathname === "/signup" ? "red" : ""}
             >
               S'inscrire
             </Link>
@@ -107,7 +107,7 @@ const Header = ({
             <nav className="nav-mobile">
               <Link
                 to="/"
-                className={location.pathname === "/" && "red"}
+                className={location.pathname === "/" ? "red" : ""}
                 onClick={() => {
                   setMobileMenu(false);
                 }}
@@ -117,7 +117,7 @@ const Header = ({
 
               <Link
                 to="/comics"
-                className={location.pathname === "/comics" && "red"}
+                className={location.pathname === "/comics" ? "red" : ""}
                 onClick={() => {
                   setMobileMenu(false);
                 }}
@@ -126,7 +126,7 @@ const Header = ({
               </Link>
               <Link
                 to="/favorites"
-                className={location.pathname === "/favorites" && "red"}
+                className={location.pathname === "/favorites" ? "red" : ""}
                 onClick={() => {
                   setMobileMenu(false);
                 }}
@@ -138,7 +138,7 @@ const Header = ({
               <div className="register-mobile">
                 <Link
                   to="/login"
-                  className={location.pathname === "/login" && "red"}
+                  className={location.pathname === "/login" ? "red" : ""}
                   onClick={() => {
                     setMobileMenu(false);
                   }}
@@ -148,7 +148,7 @@ const Header = ({
 
                 <Link
                   to="/signup"
-                  className={location.pathname === "/signup" && "red"}
+                  className={location.pathname === "/signup" ? "red" : ""}
                   onClick={() => {
                     setMobileMenu(false);
                   }}

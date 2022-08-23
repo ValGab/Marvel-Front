@@ -91,7 +91,9 @@ const Comics = ({
               ◄ Page précédente
             </button>
           ) : (
-            <div className="pagination-button"></div>
+            <button className="pagination-button-disabled">
+              ◄ Page précédente
+            </button>
           )}
           <div className="number-pages">
             <span>{page / 100 + 1}</span>
@@ -107,7 +109,9 @@ const Comics = ({
               Page suivante ►
             </button>
           ) : (
-            <div className="pagination-button"></div>
+            <button className="pagination-button-disabled">
+              Page suivante ►
+            </button>
           )}
         </div>
       )}
