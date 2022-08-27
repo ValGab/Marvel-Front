@@ -26,7 +26,9 @@ function App() {
     Cookies.get("favorites-characters") ? JSON.parse(favoritesChar) : []
   );
   const [favoritesComics, setFavoritesComics] = useState(
-    Cookies.get("favorites-comics") ? JSON.parse(favoritesCom) : []
+    Cookies.get("favorites-comics")
+      ? favoritesCom !== undefined && JSON.parse(favoritesCom)
+      : []
   );
   const [token, setToken] = useState(Cookies.get("token") || null);
 
@@ -50,12 +52,24 @@ function App() {
       Cookies.set("username", possibleUsername, {
         expires: 5,
       });
-      Cookies.set("favorites-characters", JSON.stringify(possibleFavChar), {
-        expires: 5,
-      }); // Passage du tableau en chaîne de caractères avec stringify
-      Cookies.set("favorites-comics", JSON.stringify(possibleFavCom), {
-        expires: 5,
-      });
+      if (possibleFavChar) {
+        Cookies.set(
+          "favorites-characters",
+          possibleFavChar.length > 0 ? JSON.stringify(possibleFavChar) : [],
+          {
+            expires: 5,
+          }
+        );
+      } // Passage du tableau en chaîne de caractères avec stringify
+      if (possibleFavCom) {
+        Cookies.set(
+          "favorites-comics",
+          possibleFavCom.length > 0 ? JSON.stringify(possibleFavCom) : [],
+          {
+            expires: 5,
+          }
+        );
+      }
       setToken(possibleToken);
       setUsername(possibleUsername);
     }
@@ -96,7 +110,14 @@ function App() {
                 />
                 <Route
                   path="/signup"
-                  element={<Signup setUserToken={setUserToken} token={token} />}
+                  element={
+                    <Signup
+                      setUserToken={setUserToken}
+                      token={token}
+                      setFavoritesCharacters={setFavoritesCharacters}
+                      setFavoritesComics={setFavoritesComics}
+                    />
+                  }
                 />
                 <Route
                   path="/comics"

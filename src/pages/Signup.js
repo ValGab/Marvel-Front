@@ -29,12 +29,9 @@ const Signup = ({ setUserToken, token }) => {
                       password,
                     }
                   );
-
                   setUserToken(
                     response.data.token,
-                    response.data.account.username,
-                    response.data.favoritesCharacters,
-                    response.data.favoritesComics
+                    response.data.account.username
                   );
                   setError("");
                   setUsername("");
@@ -42,6 +39,7 @@ const Signup = ({ setUserToken, token }) => {
                   setPassword("");
                   navigate("/");
                 } catch (error) {
+                  console.log(error);
                   setError(error.response.data.message);
                   setPassword("");
                 }
