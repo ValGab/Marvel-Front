@@ -49,6 +49,64 @@ const Card = ({
 
   const navigate = useNavigate();
 
+  const handleFavorite = async () => {
+    if (token) {
+      if (path === "character") {
+        try {
+          const response = await axios.post(
+            "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
+            { id, urlPic, name },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+          Cookies.set(
+            "favorites-characters",
+            JSON.stringify(response.data.newFavChar),
+            {
+              expires: 5,
+            }
+          );
+          const newTab = Cookies.get("favorites-characters");
+          setFavoritesCharacters(JSON.parse(newTab));
+          setIsFavorite(!isFavorite);
+        } catch (error) {
+          console.log(error.response);
+        }
+      }
+      if (path === "comics") {
+        try {
+          const response = await axios.post(
+            "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
+            { id, urlPic, title: name },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+
+          Cookies.set(
+            "favorites-comics",
+            JSON.stringify(response.data.newFavCom),
+            {
+              expires: 5,
+            }
+          );
+          const newTab = Cookies.get("favorites-comics");
+          setFavoritesComics(JSON.parse(newTab));
+          setIsFavorite(!isFavorite);
+        } catch (error) {
+          console.log(error.response);
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className={className}>
       {path === "character" ? (
@@ -75,63 +133,7 @@ const Card = ({
       <FontAwesomeIcon
         className={isFavorite ? "red-icon" : "black-icon"}
         icon="heart"
-        onClick={async () => {
-          if (token) {
-            if (path === "character") {
-              try {
-                const response = await axios.post(
-                  "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
-                  { id, urlPic, name },
-                  {
-                    headers: {
-                      Authorization: "Bearer " + token,
-                    },
-                  }
-                );
-                Cookies.set(
-                  "favorites-characters",
-                  JSON.stringify(response.data.newFavChar),
-                  {
-                    expires: 5,
-                  }
-                );
-                const newTab = Cookies.get("favorites-characters");
-                setFavoritesCharacters(JSON.parse(newTab));
-                setIsFavorite(!isFavorite);
-              } catch (error) {
-                console.log(error.response);
-              }
-            }
-            if (path === "comics") {
-              try {
-                const response = await axios.post(
-                  "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
-                  { id, urlPic, title: name },
-                  {
-                    headers: {
-                      Authorization: "Bearer " + token,
-                    },
-                  }
-                );
-
-                Cookies.set(
-                  "favorites-comics",
-                  JSON.stringify(response.data.newFavCom),
-                  {
-                    expires: 5,
-                  }
-                );
-                const newTab = Cookies.get("favorites-comics");
-                setFavoritesComics(JSON.parse(newTab));
-                setIsFavorite(!isFavorite);
-              } catch (error) {
-                console.log(error.response);
-              }
-            }
-          } else {
-            navigate("/login");
-          }
-        }}
+        onClick={handleFavorite}
       />
     </div>
   );

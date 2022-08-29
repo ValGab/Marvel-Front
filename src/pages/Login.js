@@ -8,6 +8,41 @@ const Login = ({ token, setUserToken }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "https://marvel-back-vg.herokuapp.com/user/login",
+          {
+            email,
+            password,
+          }
+        );
+
+        setUserToken(
+          response.data.token,
+          response.data.account.username,
+          response.data.favoritesCharacters,
+          response.data.favoritesComics
+        );
+        setEmail("");
+        setPassword("");
+        navigate("/");
+      } catch (error) {
+        setEmail("");
+        setPassword("");
+        if (error.response) {
+          setError(error.response.data.message);
+        } else {
+          console.log(error);
+        }
+      }
+    };
+
+    fetchData();
+  };
+
   return (
     <main>
       {token ? (
@@ -15,42 +50,7 @@ const Login = ({ token, setUserToken }) => {
       ) : (
         <div className="login-form">
           <h1>Se connecter</h1>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              const fetchData = async () => {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/login",
-                    {
-                      email,
-                      password,
-                    }
-                  );
-
-                  setUserToken(
-                    response.data.token,
-                    response.data.account.username,
-                    response.data.favoritesCharacters,
-                    response.data.favoritesComics
-                  );
-                  setEmail("");
-                  setPassword("");
-                  navigate("/");
-                } catch (error) {
-                  setEmail("");
-                  setPassword("");
-                  if (error.response) {
-                    setError(error.response.data.message);
-                  } else {
-                    console.log(error);
-                  }
-                }
-              };
-
-              fetchData();
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="E-mail"

@@ -51,16 +51,14 @@ const Character = () => {
             <p>{data.description}</p>
             {comics.comics.length > 0 && <h3>Apparition dans :</h3>}
             <div className="character-comics-list">
-              {comics.comics.map((element) => {
+              {comics.comics.map((comics) => {
                 return (
-                  <div className="character-comics-card" key={element._id}>
+                  <div className="character-comics-card" key={comics._id}>
                     <img
                       src={
-                        element.thumbnail.path +
-                        "." +
-                        element.thumbnail.extension
+                        comics.thumbnail.path + "." + comics.thumbnail.extension
                       }
-                      alt={element.title}
+                      alt={comics.title}
                     />
                   </div>
                 );

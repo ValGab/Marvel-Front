@@ -9,6 +9,32 @@ const Signup = ({ setUserToken, token }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "https://marvel-back-vg.herokuapp.com/user/signup",
+          {
+            username,
+            email,
+            password,
+          }
+        );
+        setUserToken(response.data.token, response.data.account.username);
+        setError("");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        navigate("/");
+      } catch (error) {
+        setError(error.response.data.message);
+        setPassword("");
+      }
+    };
+    fetchData();
+  };
+
   return (
     <main>
       {token ? (
@@ -16,37 +42,7 @@ const Signup = ({ setUserToken, token }) => {
       ) : (
         <div className="register-form">
           <h1>S'inscrire</h1>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              const fetchData = async () => {
-                try {
-                  const response = await axios.post(
-                    "https://marvel-back-vg.herokuapp.com/user/signup",
-                    {
-                      username,
-                      email,
-                      password,
-                    }
-                  );
-                  setUserToken(
-                    response.data.token,
-                    response.data.account.username
-                  );
-                  setError("");
-                  setUsername("");
-                  setEmail("");
-                  setPassword("");
-                  navigate("/");
-                } catch (error) {
-                  console.log(error);
-                  setError(error.response.data.message);
-                  setPassword("");
-                }
-              };
-              fetchData();
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Nom d'utilisateur"

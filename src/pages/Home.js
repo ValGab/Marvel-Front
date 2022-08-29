@@ -118,16 +118,16 @@ const Home = ({
       <div className="card-list">
         {/* Affichage de la liste des personnages */}
         {data.results.length > 0 ? (
-          data.results.map((element) => {
+          data.results.map((character) => {
             return (
               <Card
                 path="character"
-                picture={element.thumbnail}
-                id={element._id}
-                name={element.name}
-                description={element.description}
+                picture={character.thumbnail}
+                id={character._id}
+                name={character.name}
+                description={character.description}
                 className="card"
-                key={element._id}
+                key={character._id}
                 token={token}
                 favoritesCharacters={favoritesCharacters}
                 setFavoritesCharacters={setFavoritesCharacters}

@@ -52,12 +52,12 @@ const Favorites = ({
             )}
             <div className="favorites-list">
               {data.favoritesCharacters.length > 0 &&
-                data.favoritesCharacters.map((element) => {
+                data.favoritesCharacters.map((character) => {
                   return (
-                    <div className="favorites-link" key={element.id}>
-                      <Link to={`/character/${element.id}`}>
-                        <p>{element.name}</p>
-                        <img src={element.urlPic} alt={element.id} />
+                    <div className="favorites-link" key={character.id}>
+                      <Link to={`/character/${character.id}`}>
+                        <p>{character.name}</p>
+                        <img src={character.urlPic} alt={character.id} />
                       </Link>
                       <p
                         className="remove"
@@ -65,7 +65,7 @@ const Favorites = ({
                           try {
                             const response = await axios.post(
                               "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
-                              { id: element.id },
+                              { id: character.id },
                               {
                                 headers: {
                                   Authorization: "Bearer " + token,
@@ -79,8 +79,9 @@ const Favorites = ({
                                 expires: 5,
                               }
                             );
-                            const newTab = Cookies.get("favorites-characters");
-                            setFavoritesCharacters(JSON.parse(newTab));
+                            setFavoritesCharacters(
+                              JSON.parse(Cookies.get("favorites-characters"))
+                            );
                           } catch (error) {
                             console.log(error.response);
                           }
@@ -98,20 +99,20 @@ const Favorites = ({
               <h2>Comics favoris</h2>
             ) : (
               <h2>Aucun comics</h2>
-            )}{" "}
+            )}
             <div className="favorites-list">
               {data.favoritesComics.length > 0 &&
-                data.favoritesComics.map((element) => {
+                data.favoritesComics.map((comics) => {
                   return (
-                    <div className="favorites-link-comics" key={element.id}>
-                      <img src={element.urlPic} alt={element.id} />
+                    <div className="favorites-link-comics" key={comics.id}>
+                      <img src={comics.urlPic} alt={comics.id} />
                       <p
                         className="remove"
                         onClick={async () => {
                           try {
                             const response = await axios.post(
                               "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
-                              { id: element.id },
+                              { id: comics.id },
                               {
                                 headers: {
                                   Authorization: "Bearer " + token,
@@ -125,8 +126,9 @@ const Favorites = ({
                                 expires: 5,
                               }
                             );
-                            const newTab = Cookies.get("favorites-comics");
-                            setFavoritesComics(JSON.parse(newTab));
+                            setFavoritesComics(
+                              JSON.parse(Cookies.get("favorites-comics"))
+                            );
                           } catch (error) {
                             console.log(error.response);
                           }

@@ -118,16 +118,16 @@ const Comics = ({
       <div className="card-list">
         {/* Affichage de la liste des comics */}
         {data.results.length > 0 ? (
-          data.results.map((element) => {
+          data.results.map((comics) => {
             return (
               <Card
                 path="comics"
-                picture={element.thumbnail}
-                id={element._id}
-                name={element.title}
-                description={element.description}
+                picture={comics.thumbnail}
+                id={comics._id}
+                name={comics.title}
+                description={comics.description}
                 className="card-comics"
-                key={element._id}
+                key={comics._id}
                 token={token}
                 favoritesCharacters={favoritesCharacters}
                 setFavoritesCharacters={setFavoritesCharacters}
