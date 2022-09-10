@@ -572,7 +572,7 @@ MEDIA QUERY
   .mobile-header {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: fixed;
     top: 0;
   }
@@ -601,13 +601,16 @@ MEDIA QUERY
   }
 
   .mobile-menu {
-    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
     width: 100%;
+    padding-bottom: 60px;
     background-color: black;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex-direction: column;
     padding-top: 25px;
   }
 
