@@ -1,4 +1,4 @@
-import logo from "../img/marvel_logo.png";
+import logo from "../assets/img/marvel_logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
