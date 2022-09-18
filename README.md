@@ -12,11 +12,12 @@ A responsive site made with React on the Marvel universe. All data is provided b
 
 - Search input and pagination
 - Sign Up and Sign In
+- Character page (with params)
 - Add or remove character or comics from the favorites
 
-<img src="./src/assets/img/preview/marvel2.jpg" alt="marvel front"/>
+<img src="./src/assets/img/preview/marvel2.jpg" alt="marvel character"/>
 
-<img src="./src/assets/img/preview/marvel3.jpg" alt="marvel front"/>
+<img src="./src/assets/img/preview/marvel3.jpg" alt="marvel favorites"/>
 
 ## Available Scripts
 
