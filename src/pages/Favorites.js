@@ -18,7 +18,7 @@ const Favorites = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://marvel-back-vg.herokuapp.com/user/favorites",
+          "https://marvel-back-vg.onrender.com/user/favorites",
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -64,7 +64,7 @@ const Favorites = ({
                         onClick={async () => {
                           try {
                             const response = await axios.post(
-                              "https://marvel-back-vg.herokuapp.com/user/favoritesCharacter",
+                              "https://marvel-back-vg.onrender.com/user/favoritesCharacter",
                               { id: character.id },
                               {
                                 headers: {
@@ -111,7 +111,7 @@ const Favorites = ({
                         onClick={async () => {
                           try {
                             const response = await axios.post(
-                              "https://marvel-back-vg.herokuapp.com/user/favoritesComics",
+                              "https://marvel-back-vg.onrender.com/user/favoritesComics",
                               { id: comics.id },
                               {
                                 headers: {

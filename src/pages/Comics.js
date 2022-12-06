@@ -37,7 +37,7 @@ const Comics = ({
         }
 
         const response = await axios.get(
-          `https://marvel-back-vg.herokuapp.com/comics${filters}`
+          `https://marvel-back-vg.onrender.com/comics${filters}`
         );
         setData(response.data);
         setCount(response.data.count);

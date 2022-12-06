@@ -13,12 +13,12 @@ const Character = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://marvel-back-vg.herokuapp.com/character/${characterId}`
+          `https://marvel-back-vg.onrender.com/character/${characterId}`
         );
         setData(response.data);
         try {
           const response = await axios.get(
-            `https://marvel-back-vg.herokuapp.com/comics/${characterId}`
+            `https://marvel-back-vg.onrender.com/comics/${characterId}`
           );
           setComics(response.data);
         } catch (error) {

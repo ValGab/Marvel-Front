@@ -14,7 +14,7 @@ const Signup = ({ setUserToken, token }) => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "https://marvel-back-vg.herokuapp.com/user/signup",
+          "https://marvel-back-vg.onrender.com/user/signup",
           {
             username,
             email,
