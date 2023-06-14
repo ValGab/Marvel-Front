@@ -18,7 +18,7 @@ const Favorites = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://marvel-back-vg.onrender.com/user/favorites",
+          "https://marvel-backend-valgab.vercel.app/user/favorites",
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -64,7 +64,7 @@ const Favorites = ({
                         onClick={async () => {
                           try {
                             const response = await axios.post(
-                              "https://marvel-back-vg.onrender.com/user/favoritesCharacter",
+                              "https://marvel-backend-valgab.vercel.app/user/favoritesCharacter",
                               { id: character.id },
                               {
                                 headers: {
@@ -111,7 +111,7 @@ const Favorites = ({
                         onClick={async () => {
                           try {
                             const response = await axios.post(
-                              "https://marvel-back-vg.onrender.com/user/favoritesComics",
+                              "https://marvel-backend-valgab.vercel.app/user/favoritesComics",
                               { id: comics.id },
                               {
                                 headers: {

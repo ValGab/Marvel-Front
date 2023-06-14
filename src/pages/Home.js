@@ -37,7 +37,7 @@ const Home = ({
           }
         }
         const response = await axios.get(
-          `https://marvel-back-vg.onrender.com/characters${filters}`
+          `https://marvel-backend-valgab.vercel.app/characters${filters}`
         );
         setData(response.data);
         setCount(response.data.count);

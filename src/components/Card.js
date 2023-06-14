@@ -54,7 +54,7 @@ const Card = ({
       if (path === "character") {
         try {
           const response = await axios.post(
-            "https://marvel-back-vg.onrender.com/user/favoritesCharacter",
+            "https://marvel-backend-valgab.vercel.app/user/favoritesCharacter",
             { id, urlPic, name },
             {
               headers: {
@@ -79,7 +79,7 @@ const Card = ({
       if (path === "comics") {
         try {
           const response = await axios.post(
-            "https://marvel-back-vg.onrender.com/user/favoritesComics",
+            "https://marvel-backend-valgab.vercel.app/user/favoritesComics",
             { id, urlPic, title: name },
             {
               headers: {

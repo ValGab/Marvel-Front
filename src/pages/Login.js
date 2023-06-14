@@ -13,7 +13,7 @@ const Login = ({ token, setUserToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "https://marvel-back-vg.onrender.com/user/login",
+          "https://marvel-backend-valgab.vercel.app/user/login",
           {
             email,
             password,
